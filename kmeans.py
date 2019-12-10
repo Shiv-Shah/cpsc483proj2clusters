@@ -26,7 +26,8 @@ print("Total number of points in dataset, ie. X:", num_points)
 
 K = 3 # class activity
 
-initial_centroids = X # class activity
+initial_centroids = [[3,3],[6,2],[8,5]]
+new_centroids = [[0,0], [0,0], [0,0]] # class activity
 
 plt.plot(X[:, 0], X[:, 1], 'go')
 plt.plot(initial_centroids[:, 0], initial_centroids[:, 1], 'rx')
@@ -34,14 +35,12 @@ plt.plot(initial_centroids[:, 0], initial_centroids[:, 1], 'rx')
 print("X first row ", X[0])
 
 dist = np.zeros((K,num_points))
+# comparision here checking the values of the inital centroids and new centroids
+# find min distance and then puts it in the coreesponding centroid array
+# find average of the centroid arrays and then puts the position of the centroids in that location
+# change the value of the centroid
+# put the values in the inital centroid into the new centroids and then  start comparision
 
-def distanceBetPointsAndCentroids():
-    for i in range(K):
-        for j in range(num_points):
-            dist[i,j] = np.linalg.norm(initial_centroids[i] - X[j])
-            print (dist[i,j])
-            
-distanceBetPointsAndCentroids()        
 
 
 
