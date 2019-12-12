@@ -30,10 +30,7 @@ print("Total number of points in dataset, ie. X:", num_points)
 K = 3 # class activity
 
 initial_centroids = [[3,3],[6,2],[8,5]]
-new_centroids = [[0,0], [0,0], [0,0]] # class activity
-
-#plt.plot(X[:, 0], X[:, 1], 'go')
-#plt.plot(initial_centroids[:, 0], initial_centroids[:, 1], 'rx')
+old_centroids = [[0,0],[0,0],[0,0]]
 
 print("X first row ", X[0])
 
@@ -41,6 +38,17 @@ dist = np.zeros((K,num_points))
 cent1_min = []
 cent2_min = []
 cent3_min = []
+
+marker_style = dict(color='tab:blue', linestyle=':', marker='o', markersize=15, markerfacecoloralt='tab:red')
+
+# plot initial data
+for x,y in X:
+    plt.scatter(x,y, color='y')
+plt.scatter(initial_centroids[0][0], initial_centroids[0][1], color='r', marker='x')
+plt.scatter(initial_centroids[1][0], initial_centroids[1][1], color='g', marker='x')
+plt.scatter(initial_centroids[2][0], initial_centroids[2][1], color='b', marker='x')
+plt.show()
+
 
 # number of iterations
 for i in range(iterations):
@@ -62,7 +70,7 @@ for i in range(iterations):
     meanx1 = np.mean(cent1_min,axis=0)
     meanx2 = np.mean(cent2_min,axis=0)
     meanx3 = np.mean(cent3_min,axis=0)
-    new_centroids = initial_centroids
+    old_centroids = initial_centroids
 
     # flush old centroids
     initial_centroids.clear()
@@ -81,10 +89,10 @@ for i in range(iterations):
     for x,y in cent3_min:
         plt.scatter(x,y, color='b')
 
-    # plot centroids magenta
-    plt.scatter(initial_centroids[0][0], initial_centroids[0][1], color='m')
-    plt.scatter(initial_centroids[1][0], initial_centroids[1][1], color='m')
-    plt.scatter(initial_centroids[2][0], initial_centroids[2][1], color='m')
+    # plot centroids 
+    plt.scatter(old_centroids[0][0], old_centroids[0][1], color='r', marker='x')
+    plt.scatter(old_centroids[1][0], old_centroids[1][1], color='g', marker='x')
+    plt.scatter(old_centroids[2][0], old_centroids[2][1], color='b', marker='x')
     plt.pause(0.05)
 
     # flush old centroidal array
@@ -96,19 +104,5 @@ for i in range(iterations):
     # dont clear last plot with -1
     if i < iterations-1:
         plt.clf()
-
 # show plot
 plt.show()
-
-
-
-# comparision here checking the values of the inital centroids and new centroids
-# find min distance and then puts it in the coreesponding centroid array
-# find average of the centroid arrays and then puts the position of the centroids in that location
-# change the value of the centroid
-# put the values in the inital centroid into the new centroids and then  start comparision
-
-
-
-
-
